@@ -38,14 +38,14 @@ end
 
 function self:GetBanReason (banId)
 	local banInfo = ULib.bans [banId]
-	if not banInfo then return false end
+	if not banInfo then return nil end
 	
 	return banInfo.reason
 end
 
 function self:GetBanTimeRemaining (banId)
 	local banInfo = ULib.bans [banId]
-	if not banInfo then return false end
+	if not banInfo then return nil end
 	
 	if banInfo.unban == 0 then return math.huge end
 	
@@ -54,7 +54,7 @@ end
 
 function self:GetBannerId (banId)
 	local banInfo = ULib.bans [banId]
-	if not banInfo then return false end
+	if not banInfo then return nil end
 	
 	if banInfo.admin_name == "(Console)" then return "Console" end
 	
