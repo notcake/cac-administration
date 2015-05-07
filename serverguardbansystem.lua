@@ -17,31 +17,6 @@ function self:IsAvailable ()
 	return istable (serverguard)
 end
 
-function self:IsDefault ()
-	return false
-end
-
--- Bans
-function self:IsUserBanned (userId)
-	return false
-end
-
-function self:GetCurrentBan (userId)
-	return nil
-end
-
-function self:GetBanReason (banId)
-	return nil
-end
-
-function self:GetBanTimeRemaining (banId)
-	return nil
-end
-
-function self:GetBannerId (banId)
-	return nil
-end
-
 -- IBanSystem
 function self:Ban (userId, duration, reason, bannerId)
 	if duration == math.huge then duration = 0 end

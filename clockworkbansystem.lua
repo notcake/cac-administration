@@ -1,5 +1,5 @@
 local self = {}
-CAC.ClockworkBanSystem = CAC.MakeConstructor (self, CAC.IBanSystem)
+CAC.ClockworkBanSystem = CAC.MakeConstructor (self, CAC.BanSystem)
 
 function self:ctor ()
 end
@@ -15,31 +15,6 @@ end
 
 function self:IsAvailable ()
 	return istable (Clockwork)
-end
-
-function self:IsDefault ()
-	return false
-end
-
--- Bans
-function self:IsUserBanned (userId)
-	return false
-end
-
-function self:GetCurrentBan (userId)
-	return nil
-end
-
-function self:GetBanReason (banId)
-	return nil
-end
-
-function self:GetBanTimeRemaining (banId)
-	return nil
-end
-
-function self:GetBannerId (banId)
-	return nil
 end
 
 -- IBanSystem

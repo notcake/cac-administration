@@ -1,5 +1,5 @@
 local self = {}
-CAC.DefaultBanSystem = CAC.MakeConstructor (self, CAC.IBanSystem)
+CAC.DefaultBanSystem = CAC.MakeConstructor (self, CAC.BanSystem)
 
 function self:ctor ()
 end
@@ -19,27 +19,6 @@ end
 
 function self:IsDefault ()
 	return true
-end
-
--- Bans
-function self:IsUserBanned (userId)
-	return false
-end
-
-function self:GetCurrentBan (userId)
-	return nil
-end
-
-function self:GetBanReason (banId)
-	return nil
-end
-
-function self:GetBanTimeRemaining (banId)
-	return nil
-end
-
-function self:GetBannerId (banId)
-	return nil
 end
 
 -- IBanSystem
