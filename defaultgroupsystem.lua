@@ -1,5 +1,5 @@
 local self = {}
-CAC.DefaultGroupSystem = CAC.MakeConstructor (self, CAC.IReadOnlyGroupSystem)
+CAC.DefaultGroupSystem = CAC.MakeConstructor (self, CAC.SimpleReadOnlyGroupSystem)
 
 local defaultGroups =
 {
@@ -33,12 +33,6 @@ function self:GetGroupEnumerator ()
 	return CAC.KeyEnumerator (defaultGroups)
 end
 
-function self:GetGroupReference (groupId)
-	if not self:GroupExists (groupId) then return nil end
-	
-	return CAC.GroupReference (self:GetId (), groupId)
-end
-
 function self:GroupExists (groupId)
 	return defaultGroups [groupId] ~= nil
 end
@@ -47,28 +41,6 @@ function self:GetBaseGroup (groupId)
 	if not self:GroupExists (groupId) then return nil end
 	
 	return defaultGroups [groupId].BaseGroup
-end
-
-function self:GetBaseGroupEnumerator (groupId)
-	return CAC.SingleValueEnumerator (self:GetBaseGroup (groupId))
-end
-
-function self:IsGroupSubsetOfGroup (groupId, baseGroupId)
-	-- Does groupId inherit from baseGroupId?
-	groupId = self:GetBaseGroup (groupId)
-	
-	while groupId do
-		if groupId == baseGroupId then return true end
-		
-		groupId = self:GetBaseGroup (groupId)
-	end
-	
-	return false
-end
-
-function self:IsGroupSupersetOfGroup (baseGroupId, groupId)
-	-- Does groupId inherit from baseGroupId?
-	return self:IsGroupSubsetOfGroup (groupId, baseGroupId)
 end
 
 -- Group
@@ -91,17 +63,6 @@ function self:GetGroupIcon (groupId)
 end
 
 -- Users
-function self:IsUserInGroup (userId, groupId)
-	local ply = CAC.PlayerMonitor:GetUserEntity (userId)
-	if ply and not ply:IsValid () then ply = nil end
-	
-	if groupId == "user"       then return true end
-	if groupId == "admin"      then return ply and ply:IsAdmin      () or false end
-	if groupId == "superadmin" then return ply and ply:IsSuperAdmin () or false end
-	
-	return false
-end
-
 function self:GetUserGroup (userId)
 	local ply = CAC.PlayerMonitor:GetUserEntity (userId)
 	if ply and not ply:IsValid () then ply = nil end
@@ -113,10 +74,6 @@ function self:GetUserGroup (userId)
 	end
 	
 	return "user"
-end
-
-function self:GetUserGroupEnumerator (userId)
-	return CAC.SingleValueEnumerator (self:GetUserGroup (groupId))
 end
 
 CAC.SystemRegistry:RegisterSystem ("GroupSystem", CAC.DefaultGroupSystem ())

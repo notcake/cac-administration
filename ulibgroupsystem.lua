@@ -17,19 +17,9 @@ function self:IsAvailable ()
 	return istable (ULib) and istable (ULib.ucl)
 end
 
-function self:IsDefault ()
-	return false
-end
-
 -- Groups
 function self:GetGroupEnumerator ()
 	return CAC.KeyEnumerator (ULib.ucl.groups)
-end
-
-function self:GetGroupReference (groupId)
-	if not self:GroupExists (groupId) then return nil end
-	
-	return CAC.GroupReference (self:GetId (), groupId)
 end
 
 function self:GroupExists (groupId)
@@ -42,28 +32,6 @@ function self:GetBaseGroup (groupId)
 	if baseGroupId == false then return nil end
 	
 	return baseGroupId
-end
-
-function self:GetBaseGroupEnumerator (groupId)
-	return CAC.SingleValueEnumerator (self:GetBaseGroup (groupId))
-end
-
-function self:IsGroupSubsetOfGroup (groupId, baseGroupId)
-	-- Does groupId inherit from baseGroupId?
-	groupId = self:GetBaseGroup (groupId)
-	
-	while groupId do
-		if groupId == baseGroupId then return true end
-		
-		groupId = self:GetBaseGroup (groupId)
-	end
-	
-	return false
-end
-
-function self:IsGroupSupersetOfGroup (baseGroupId, groupId)
-	-- Does groupId inherit from baseGroupId?
-	return self:IsGroupSubsetOfGroup (groupId, baseGroupId)
 end
 
 -- Group
@@ -93,17 +61,6 @@ function self:GetUserGroup (userId)
 	end
 	
 	return ULib.ACCESS_ALL
-end
-
-function self:GetUserGroupEnumerator (userId)
-	return CAC.SingleValueEnumerator (self:GetUserGroup (groupId))
-end
-
-function self:IsUserInGroup (userId, groupId)
-	local userGroupId = self:GetUserGroup (userId)
-	if userGroupId == groupId then return true end
-	
-	return self:IsGroupSubsetOfGroup (userGroupId, groupId)
 end
 
 CAC.SystemRegistry:RegisterSystem ("GroupSystem", CAC.ULibGroupSystem ())
