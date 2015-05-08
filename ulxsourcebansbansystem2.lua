@@ -14,7 +14,7 @@ function self:GetName ()
 end
 
 function self:IsAvailable ()
-	return isfunction (SBAN_BanPlayer)
+	return isfunction (SBAN_banplayer)
 end
 
 -- IBanSystem
