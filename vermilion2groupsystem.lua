@@ -1,5 +1,5 @@
 local self = {}
-CAC.Vermilion2GroupSystem = CAC.MakeConstructor (self, CAC.IReadOnlyGroupSystem)
+CAC.Vermilion2GroupSystem = CAC.MakeConstructor (self, CAC.SimpleReadOnlyGroupSystem)
 
 function self:ctor ()
 end

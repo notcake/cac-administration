@@ -1,5 +1,5 @@
 local self = {}
-CAC.ULibGroupSystem = CAC.MakeConstructor (self, CAC.IReadOnlyGroupSystem)
+CAC.ULibGroupSystem = CAC.MakeConstructor (self, CAC.SimpleReadOnlyGroupSystem)
 
 function self:ctor ()
 end
