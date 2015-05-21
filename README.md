@@ -6,6 +6,29 @@ Batteries not included. Not guaranteed to be suitable for your needs.
 Some work is required to get this to run - see the [Missing Batteries](#missing-batteries) section.  
 You should rename the CAC table to something else if you use the code in this repository.
 
+## Examples
+**Print whether the local client is in the "admin" group in the "best" installed admin mod.**
+```Lua
+local groupSystem = SystemRegistry:GetBestSystem ("GroupSystem")
+print (groupSystem:IsUserInGroup (LocalPlayer ():SteamID (), "admin"))
+```
+
+**Print a list of all groups in the "best" installed admin mod.**
+```Lua
+local groupSystem = SystemRegistry:GetBestSystem ("GroupSystem")
+print (groupSystem:GetName () .. " groups:")
+for groupId in groupSystem:GetGroupEnumerator () do
+	local groupDisplayName = groupSystem:GetGroupDisplayName (groupId)
+	print ("\t" .. groupDisplayName)
+end
+```
+
+**Ban a user using the "best" installed admin mod.**
+```Lua
+local banSystem = SystemRegistry:GetBestSystem ("BanSystem")
+banSystem:Ban (LocalPlayer ():SteamID (), 3600, "Test ban", nil)
+```
+
 ## Supported functionality
 ### Supported admin mod tasks
 See the [Interfaces](#interfaces) section.
@@ -50,12 +73,6 @@ bool IReadOnlyGroupSystem:IsUserSuperAdmin (SteamId steamId)
 - All other admin mods not on the previous list
 
 ## "Documentation"
-### Example
-```Lua
-local groupSystem = SystemRegistry:GetBestSystem ("GroupSystem")
-print (groupSystem:IsUserInGroup (LocalPlayer ():SteamID (), "admin"))
-```
-
 ### System Registry
 ```C#
 SystemId : string;
