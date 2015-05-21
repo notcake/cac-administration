@@ -15,6 +15,8 @@ See the [Interfaces](#interfaces) section.
 - Submitting bans
 
 ### Currently unsupported admin mod tasks
+None of these are required at all for !cake Anti-Cheat, apart from ban querying.
+
 - Usage of command system
 - Modification of groups
 - Modification of user groups
@@ -22,6 +24,8 @@ See the [Interfaces](#interfaces) section.
 - Querying of bans
 
 ### Currently missing functions
+These are not required at all for !cake Anti-Cheat, since Player:IsAdmin () is sufficient.
+
 ```C#
 bool IReadOnlyGroupSystem:IsGroupAdmin (GroupId groupId)
 bool IReadOnlyGroupSystem:IsGroupSuperAdmin (GroupId groupId)
