@@ -1,5 +1,5 @@
 local self = {}
-CAC.SourceBansBanSystem = CAC.MakeConstructor (self, CAC.IBanSystem)
+CAC.SourceBansBanSystem = CAC.MakeConstructor (self, CAC.BanSystem)
 
 function self:ctor ()
 end

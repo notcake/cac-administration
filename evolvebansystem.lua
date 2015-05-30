@@ -1,5 +1,5 @@
 local self = {}
-CAC.EvolveBanSystem = CAC.MakeConstructor (self, CAC.IBanSystem)
+CAC.EvolveBanSystem = CAC.MakeConstructor (self, CAC.BanSystem)
 
 function self:ctor ()
 end
