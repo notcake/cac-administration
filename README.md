@@ -269,8 +269,43 @@ abstract class BanSystem : IBanSystem
 ### Missing Batteries
 These functions are not included in this repository.  
 Implement them however you want or scrap their usage altogether.  
-You should rename the CAC table to something else if you use the code in this repository.
+You should rename the CAC table to something else if you use the code in this repository in production.
 
+#### Lazy way to get this to work
+```Lua
+include ("glib/glib.lua") -- https://github.com/notcake/glib
+
+CAC = GLib
+
+include ("administration/systemregistry.lua")
+include ("administration/ireadonlygroupsystem.lua")
+include ("administration/ireadonlybansystem.lua")
+include ("administration/ibansystem.lua")
+
+include ("administration/simplereadonlygroupsystem.lua")
+include ("administration/bansystem.lua")
+
+include ("administration/groupreference.lua")
+include ("administration/userreference.lua")
+
+include ("administration/defaultgroupsystem.lua")
+include ("administration/ulibgroupsystem.lua")
+include ("administration/evolvegroupsystem.lua")
+include ("administration/serverguardgroupsystem.lua")
+include ("administration/vermilion2groupsystem.lua")
+
+include ("administration/defaultbansystem.lua")
+include ("administration/ulibbansystem.lua")
+include ("administration/ulxsourcebansbansystem.lua")
+include ("administration/ulxsourcebansbansystem2.lua")
+include ("administration/evolvebansystem.lua")
+include ("administration/sourcebansbansystem.lua")
+include ("administration/assmodbansystem.lua")
+include ("administration/serverguardbansystem.lua")
+include ("administration/vermilion2bansystem.lua")
+```
+
+#### Things you have to implement if you don't choose the lazy way
 ```C#
 Constructor<T> MakeConstructor (table unfinalizedMethodTable, Constructor<BaseT> baseClassConstructor);
 where Constructor<T> : Either<function<(...) -> T>, table with metatable.__call : function<(_, ...) -> T> defined>;
