@@ -5,7 +5,7 @@ function self:ctor ()
 end
 
 -- IReadOnlyBanSystem
-function self:IsDefualt ()
+function self:IsDefault ()
 	return false
 end
 
