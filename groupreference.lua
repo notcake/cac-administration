@@ -19,10 +19,9 @@ function self:Deserialize (inBuffer)
 end
 
 function self:Clone (clone)
-	clone = clone or CAC.GroupReference ()
+	clone = clone or self.__ictor ()
 	
-	clone:SetGroupSystemId (self:GetGroupSystemId ())
-	clone:SetGroupId       (self:GetGroupId       ())
+	clone:Copy (self)
 	
 	return clone
 end

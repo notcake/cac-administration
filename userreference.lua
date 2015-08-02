@@ -24,10 +24,9 @@ function self:Deserialize (inBuffer)
 end
 
 function self:Clone (clone)
-	clone = clone or CAC.UserReference ()
+	clone = clone or self.__ictor ()
 	
-	clone:SetUserId (self:GetUserId ())
-	clone.DisplayName = self.DisplayName
+	clone:Copy (self)
 	
 	return clone
 end
