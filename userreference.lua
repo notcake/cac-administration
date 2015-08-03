@@ -60,6 +60,18 @@ function self:ContainsUser (userId)
 	return self.UserId == userId
 end
 
+function self:MatchesReference (actorReference)
+	if actorReference:IsUserReference () then
+		-- In case of singleplayer STEAM_0:0:0 weirdness
+		return self:ContainsUser (actorReference:GetUserId ()) or
+		       actorReference:ContainsUser (self:GetUserId ())
+	elseif actorReference:IsGroupReference () then
+		return false
+	else
+		return false
+	end
+end
+
 function self:MatchesUser (userId)
 	return self:ContainsUser (userId)
 end

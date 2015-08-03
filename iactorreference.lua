@@ -99,6 +99,10 @@ function self:ContainsUser (userId)
 	CAC.Error ("IActorReference:ContainsUser : Not implemented.")
 end
 
+function self:MatchesReference (actorReference)
+	CAC.Error ("IActorReference:MatchesReference :Not implemented.")
+end
+
 function self:MatchesUser (userId)
 	CAC.Error ("IActorReference:MatchesUser : Not implemented.")
 end

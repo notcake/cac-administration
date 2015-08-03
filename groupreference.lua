@@ -52,6 +52,22 @@ function self:ContainsUser (userId)
 	return self:GetGroupSystem ():IsUserInGroup (userId, self.GroupId)
 end
 
+function self:MatchesReference (actorReference)
+	if actorReference:IsUserReference () then
+		return self:ContainsUser (actorReference:GetUserId ())
+	elseif actorReference:IsGroupReference () then
+		if self:GetGroupSystemId () ~= actorReference:GetGroupSystemId () then return false end
+		if self:GetGroupId       () == actorReference:GetGroupId       () then return true  end
+		
+		local groupSystem = self:GetGroupSystem ()
+		if not groupSystem then return false end
+		
+		return groupSystem:IsGroupSupersetOfGroup (self:GetGroupId (), actorReference:GetGroupId ())
+	else
+		return false
+	end
+end
+
 function self:MatchesUser (userId)
 	return self:ContainsUser (userId)
 end
