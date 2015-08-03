@@ -169,22 +169,27 @@ interface Serialization.ISerializable
 }
 
 // Not explicitly declared in the code.
-class Reference : Serialization.ISerializable
+interface IActorReference : Serialization.ISerializable
 {
-	Reference                  Clone (<typeof (self)>? clone);
+	<typeof (self)>            Clone (<typeof (self)>? clone);
 	<self>                     Copy (<typeof (self)> source);
+	
+	// Reference
+	string                     GetDisplayName ();
+	bool                       IsGroupReference ();
+	bool                       IsUserReference ();
+	string                     ToString ()
 	
 	// Membership
 	bool                       ContainsUser (SteamId steamId);
 	bool                       MatchesUser (SteamId steamId);
 }
 
-class GroupReference : Reference
+class GroupReference : IActorReference
 {
 	GroupReference (GroupSystemId groupSystemId, GroupId groupId);
 	
 	// GroupReference
-	string                     GetDisplayName ();
 	string                     GetGroupDisplayName (string? fallbackDisplayName);
 	string                     GetGroupIcon (string? fallbackIcon);
 	IReadOnlyGroupSystem       GetGroupSystem ();
@@ -193,20 +198,15 @@ class GroupReference : Reference
 	<self>                     SetGroupSystemId (GroupSystemId groupSystemId);
 	GroupId                    GetGroupId ();
 	<self>                     SetGroupId (GroupId groupId);
-	
-	string                     ToString ();
 }
 
-class UserReference : Reference
+class UserReference : IActorReference
 {
 	UserReference (SteamId steamId);
 	
 	// UserReference
-	string                     GetDisplayName ();
 	SteamId                    GetUserId ();
 	<self>                     SetUserId (SteamId steamId);
-	
-	string                     ToString ();
 }
 ```
 
