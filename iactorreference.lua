@@ -1,7 +1,7 @@
 local self = {}
 CAC.IActorReference = CAC.MakeConstructor (self, CAC.Serialization.ISerializable)
 
-function CAC.IActorReference.Serialize (actorReference, outBuffer)
+function CAC.IActorReference.Serialize (outBuffer, actorReference)
 	if actorReference:IsUserReference () then
 		outBuffer:UInt8 (1)
 	elseif actorReference:IsGroupReference () then
