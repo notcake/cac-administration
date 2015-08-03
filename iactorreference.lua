@@ -12,6 +12,8 @@ function CAC.IActorReference.Serialize (actorReference, outBuffer)
 	end
 	
 	actorReference:Serialize (outBuffer)
+	
+	return outBuffer
 end
 
 function CAC.IActorReference.Deserialize (inBuffer)

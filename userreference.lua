@@ -14,6 +14,8 @@ function self:Serialize (outBuffer)
 	
 	outBuffer:StringN8 (self.UserId     )
 	outBuffer:StringN8 (self.DisplayName)
+	
+	return outBuffer
 end
 
 function self:Deserialize (inBuffer)
@@ -21,6 +23,8 @@ function self:Deserialize (inBuffer)
 	self.DisplayName = inBuffer:StringN8 ()
 	
 	self:UpdateDisplayName ()
+	
+	return self
 end
 
 -- IActorReference

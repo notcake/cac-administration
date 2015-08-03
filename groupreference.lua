@@ -11,11 +11,15 @@ end
 function self:Serialize (outBuffer)
 	outBuffer:StringN8 (self.GroupSystemId)
 	outBuffer:StringN8 (self.GroupId      )
+	
+	return outBuffer
 end
 
 function self:Deserialize (inBuffer)
 	self:SetGroupSystemId (inBuffer:StringN8 ())
 	self:SetGroupId       (inBuffer:StringN8 ())
+	
+	return self
 end
 
 -- IActorReference
