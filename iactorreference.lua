@@ -45,7 +45,7 @@ function CAC.IActorReference.FromString (text)
 	url = string.gsub (url, "^www%.", "")
 	if string.match (url, "^steamcommunity.com/profiles/7656[0-9]+") then
 		local communityId = string.match (url, "7656[0-9]+")
-		return CAC.UserReference (CAC.CommunityIdToSteamId (communityId))
+		return CAC.UserReference (util.SteamIDFrom64 (communityId))
 	end
 	
 	-- Group
