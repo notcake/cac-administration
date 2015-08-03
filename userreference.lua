@@ -1,5 +1,5 @@
 local self = {}
-CAC.UserReference = CAC.MakeConstructor (self, CAC.Serialization.ISerializable)
+CAC.UserReference = CAC.MakeConstructor (self, CAC.IActorReference)
 
 function self:ctor (userId)
 	self.UserId      = userId
@@ -23,19 +23,31 @@ function self:Deserialize (inBuffer)
 	self:UpdateDisplayName ()
 end
 
-function self:Clone (clone)
-	clone = clone or self.__ictor ()
-	
-	clone:Copy (self)
-	
-	return clone
-end
-
+-- IActorReference
 function self:Copy (source)
 	self:SetUserId (source:GetUserId ())
 	self.DisplayName = source.DisplayName
 	
 	return self
+end
+
+-- Reference
+function self:GetDisplayName ()
+	self:UpdateDisplayName ()
+	
+	return self.DisplayName
+end
+
+function self:IsGroupReference ()
+	return false
+end
+
+function self:IsUserReference ()
+	return true
+end
+
+function self:ToString ()
+	return self.UserId
 end
 
 -- Membership
@@ -53,12 +65,6 @@ function self:MatchesUser (userId)
 end
 
 -- UserReference
-function self:GetDisplayName ()
-	self:UpdateDisplayName ()
-	
-	return self.DisplayName
-end
-
 function self:GetUserId ()
 	return self.UserId
 end
@@ -72,10 +78,6 @@ function self:SetUserId (userId)
 	self:UpdateDisplayName ()
 	
 	return self
-end
-
-function self:ToString ()
-	return self.UserId
 end
 
 -- Internal, do not call

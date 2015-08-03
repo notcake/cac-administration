@@ -1,5 +1,5 @@
 local self = {}
-CAC.GroupReference = CAC.MakeConstructor (self, CAC.Serialization.ISerializable)
+CAC.GroupReference = CAC.MakeConstructor (self, CAC.IActorReference)
 
 function self:ctor (groupSystemId, groupId)
 	self.GroupSystem   = nil
@@ -18,19 +18,33 @@ function self:Deserialize (inBuffer)
 	self:SetGroupId       (inBuffer:StringN8 ())
 end
 
-function self:Clone (clone)
-	clone = clone or self.__ictor ()
-	
-	clone:Copy (self)
-	
-	return clone
-end
-
+-- IActorReference
 function self:Copy (source)
 	self:SetGroupSystemId (source:GetGroupSystemId ())
 	self:SetGroupId       (source:GetGroupId       ())
 	
 	return self
+end
+
+-- Reference
+function self:GetDisplayName ()
+	if self:GetGroupSystem () then
+		return self:GetGroupSystem ():GetName () .. " : "  .. self.GroupId
+	else
+		return self.GroupSystemId .. " : " .. self.GroupId
+	end
+end
+
+function self:IsGroupReference ()
+	return true
+end
+
+function self:IsUserReference ()
+	return false
+end
+
+function self:ToString ()
+	return self.GroupSystemId .. "/" .. self.GroupId
 end
 
 -- Membership
@@ -43,14 +57,6 @@ function self:MatchesUser (userId)
 end
 
 -- GroupReference
-function self:GetDisplayName ()
-	if self:GetGroupSystem () then
-		return self:GetGroupSystem ():GetName () .. " : "  .. self.GroupId
-	else
-		return self.GroupSystemId .. " : " .. self.GroupId
-	end
-end
-
 function self:GetGroupDisplayName (fallback)
 	if not self:GetGroupSystem () then return fallback end
 	
@@ -107,8 +113,4 @@ function self:SetGroupId (groupId)
 	self.GroupId = groupId
 	
 	return self
-end
-
-function self:ToString ()
-	return self.GroupSystemId .. "/" .. self.GroupId
 end
