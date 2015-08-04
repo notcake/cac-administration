@@ -1,6 +1,14 @@
 local self = {}
 CAC.UserReference = CAC.MakeConstructor (self, CAC.IActorReference)
 
+function CAC.UserReference.FromPlayer (ply)
+	return CAC.UserReference (CAC.GetPlayerId (ply))
+end
+
+function CAC.UserReference.FromUserId (userId)
+	return CAC.UserReference (userId)
+end
+
 function self:ctor (userId)
 	self.UserId      = userId
 	self.DisplayName = self.UserId
