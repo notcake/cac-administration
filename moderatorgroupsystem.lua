@@ -56,11 +56,9 @@ function self:GetUserGroup (userId)
 	local ply = CAC.PlayerMonitor:GetUserEntity (userId)
 	if ply and not ply:IsValid () then ply = nil end
 	
-	if ply then
-		return moderator.GetGroup (ply)
-	end
+	if not ply then return nil end
 	
-	return nil
+	return moderator.GetGroup (ply)
 end
 
 CAC.SystemRegistry:RegisterSystem ("GroupSystem", CAC.ModeratorGroupSystem ())

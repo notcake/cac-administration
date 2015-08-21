@@ -52,11 +52,11 @@ end
 -- Users
 function self:GetUserGroup (userId)
 	local ply = CAC.PlayerMonitor:GetUserEntity (userId)
-	if ply and ply:IsValid () then
-		return serverguard.player:GetRank (ply)
-	end
+	if ply and not ply:IsValid () then ply = nil end
 	
-	return nil
+	if not ply then return nil end
+	
+	return serverguard.player:GetRank (ply)
 end
 
 CAC.SystemRegistry:RegisterSystem ("GroupSystem", CAC.ServerGuardGroupSystem ())

@@ -56,11 +56,11 @@ end
 -- Users
 function self:GetUserGroup (userId)
 	local ply = CAC.PlayerMonitor:GetUserEntity (userId)
-	if ply and ply:IsValid () then
-		return ply:GetUserGroup ()
-	end
+	if ply and not ply:IsValid () then ply = nil end
 	
-	return ULib.ACCESS_ALL
+	if not ply then return ULib.ACCESS_ALL end
+	
+	return ply:GetUserGroup ()
 end
 
 CAC.SystemRegistry:RegisterSystem ("GroupSystem", CAC.ULibGroupSystem ())

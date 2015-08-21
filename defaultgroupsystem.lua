@@ -67,11 +67,10 @@ function self:GetUserGroup (userId)
 	local ply = CAC.PlayerMonitor:GetUserEntity (userId)
 	if ply and not ply:IsValid () then ply = nil end
 	
-	if ply then
-		if ply:IsSuperAdmin () then return "superadmin" end
-		if ply:IsAdmin      () then return "admin"      end
-		return "user"
-	end
+	if not ply then return "user" end
+	
+	if ply:IsSuperAdmin () then return "superadmin" end
+	if ply:IsAdmin      () then return "admin"      end
 	
 	return "user"
 end
