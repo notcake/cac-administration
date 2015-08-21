@@ -14,7 +14,7 @@ function self:GetName ()
 end
 
 function self:IsAvailable ()
-	return istable (maestro)
+	return istable (maestro) and isfunction (maestro.rankgettable)
 end
 
 -- Groups
