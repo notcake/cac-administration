@@ -34,19 +34,19 @@ end
 function self:GetGroupColor (groupId)
 	if not self:GroupExists (groupId) then return nil end
 	
-	return serverguard.ranks:GetVariable (groupId, "color")
+	return serverguard.ranks:GetStored () [groupId].color
 end
 
 function self:GetGroupDisplayName (groupId)
 	if not self:GroupExists (groupId) then return nil end
 	
-	return serverguard.ranks:GetVariable (groupId, "name")
+	return serverguard.ranks:GetStored () [groupId].name
 end
 
 function self:GetGroupIcon (groupId)
 	if not self:GroupExists (groupId) then return nil end
 	
-	return serverguard.ranks:GetVariable (groupId, "texture")
+	return serverguard.ranks:GetStored () [groupId].texture
 end
 
 -- Users
