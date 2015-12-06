@@ -285,24 +285,30 @@ include ("administration/ibansystem.lua")
 include ("administration/simplereadonlygroupsystem.lua")
 include ("administration/bansystem.lua")
 
+include ("administration/iactorreference.lua")
 include ("administration/groupreference.lua")
 include ("administration/userreference.lua")
 
 include ("administration/defaultgroupsystem.lua")
 include ("administration/ulibgroupsystem.lua")
 include ("administration/evolvegroupsystem.lua")
+include ("administration/moderatorgroupsystem.lua")
 include ("administration/serverguardgroupsystem.lua")
 include ("administration/vermilion2groupsystem.lua")
+include ("administration/maestrogroupsystem.lua")
 
 include ("administration/defaultbansystem.lua")
 include ("administration/ulibbansystem.lua")
 include ("administration/ulxsourcebansbansystem.lua")
 include ("administration/ulxsourcebansbansystem2.lua")
 include ("administration/evolvebansystem.lua")
+include ("administration/moderatorbansystem.lua")
 include ("administration/sourcebansbansystem.lua")
 include ("administration/assmodbansystem.lua")
 include ("administration/serverguardbansystem.lua")
 include ("administration/vermilion2bansystem.lua")
+include ("administration/maestrobansystem.lua")
+include ("administration/clockworkbansystem.lua")
 ```
 
 #### Things you have to implement if you don't choose the lazy way
