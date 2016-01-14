@@ -14,12 +14,12 @@ function self:GetName ()
 end
 
 function self:IsAvailable ()
-	return istable (maestro) and isfunction (maestro.rankgettable)
+	return istable (maestro) and istable (maestro.ranks)
 end
 
 -- Groups
 function self:GetGroupEnumerator ()
-	return CAC.KeyEnumerator (maestro.rankgettable ())
+	return CAC.KeyEnumerator (maestro.ranks)
 end
 
 function self:GroupExists (groupId)
@@ -29,7 +29,7 @@ end
 function self:GetBaseGroup (groupId)
 	if not self:GroupExists (groupId) then return nil end
 	
-	local baseGroupId = maestro.rankgettable () [groupId].inherits
+	local baseGroupId = maestro.rankget (groupId).inherits
 	if baseGroupId == groupId then return nil end
 	
 	return groupId
